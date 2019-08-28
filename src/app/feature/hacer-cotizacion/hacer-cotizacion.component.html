@@ -1,3 +1,44 @@
-<p>
-  hacer-cotizacion works!
-</p>
+<form #cotizacionForm="ngForm">
+  <h1>
+    Realizar cotización
+  </h1>
+  <div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label for="fechaInicio"><span class="hidden">Fecha y Hora inciales</span></label>
+            <div class="input-group date" data-target-input="nearest" NgTempusdominusBootstrap>
+              <input
+                id="fechaInicio"
+                class="form-control"
+                [(ngModel)]="date"
+                name="fechaInicio"
+                [options]="options"
+                NgTempusdominusBootstrapInput
+                type="text"
+                required
+              />
+              <div class="input-group-append" NgTempusdominusBootstrapToggle>
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="duracion"><span class="hidden">Duración</span></label>
+        <input name="duracion" id="duracion" type="number" placeholder="Duración" ngModel required class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="totalQuotationValue"><span class="hidden">Valor cotización</span></label>
+        <input type="text" name="totalQuotationValue" ngModel class="form-control" id="totalQuotationValue" value="{{cotizacion.totalQuotationValue}}"/>
+      </div>
+    </div>
+  </div>
+  <div class="form-input">
+    <button class="btn btn-primary" (click)="obtenerValor(cotizacionForm)" [disabled]="!cotizacionForm.valid">¿Cuánto vale?</button>
+  </div>
+</form>
