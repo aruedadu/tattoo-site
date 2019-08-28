@@ -34,11 +34,53 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label for="totalQuotationValue"><span class="hidden">Valor cotización</span></label>
-        <input type="text" name="totalQuotationValue" ngModel class="form-control" id="totalQuotationValue" value="{{cotizacion.totalQuotationValue}}"/>
+        <input type="text" name="totalQuotationValue" ngModel class="form-control"
+          id="totalQuotationValue" value="{{cotizacion.totalQuotationValue}}" disabled="true"/>
       </div>
     </div>
   </div>
-  <div class="form-input">
-    <button class="btn btn-primary" (click)="obtenerValor(cotizacionForm)" [disabled]="!cotizacionForm.valid">¿Cuánto vale?</button>
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="form-input">
+        <button class="btn btn-primary" (click)="obtenerValor(cotizacionForm)"
+          [disabled]="!cotizacionForm.valid">¿Cuánto vale?</button>
+      </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-input">
+          <button class="btn btn-primary" (click)="consultarArtistasDisponibles(cotizacionForm)"
+            [disabled]="!mostrarAgendas">Conslutar artistas disponibles</button>
+        </div>
+      </div>
+    <div class="col-sm-1">
+      <div class="form-input">
+        <button class="btn btn-primary" (click)="limpiar()">Limpiar</button>
+      </div>
+    </div>
   </div>
+
+  <div *ngIf="mostrarArtistasDisponibles" class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="duracion"><span class="hidden">Artistas Disponibles</span></label>
+          <select class="form-control" ngModel name="artistaId" required>
+            <option *ngFor="let artista of artistas" [value]="artista.id">{{artista.artistFullName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="terceroNumeroId"><span class="hidden">Cédula de la persona a tatuar</span></label>
+          <input type="text" name="terceroNumeroId" ngModel class="form-control"
+            id="terceroNumeroId" required/>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-input">
+          <button class="btn btn-primary" (click)="agendarCita(cotizacionForm)"
+            [disabled]="!cotizacionForm.valid">Agendar cita</button>
+        </div>
+      </div>
+  </div>
+
 </form>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HacerCotizacionComponent } from './hacer-cotizacion/hacer-cotizacion.component';
 import { AgendarCitaComponent } from './agendar-cita/agendar-cita.component';
@@ -17,6 +17,9 @@ import { NgTempusdominusBootstrapModule } from 'src/tempus/ng-tempusdominus-boot
     FormsModule,
     ReactiveFormsModule,
     NgTempusdominusBootstrapModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class FeatureModule { }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreComponent } from './core.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -14,7 +14,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClienteGeneralService } from './cliente-general.service';
 
 @NgModule({
-  declarations: [CoreComponent, DashboardComponent, NavbarComponent, AgendarCitaComponent, HacerCotizacionComponent],
+  declarations: [
+    CoreComponent,
+    DashboardComponent,
+    NavbarComponent,
+    AgendarCitaComponent,
+    HacerCotizacionComponent
+  ],
   imports: [
     CommonModule,
     CoreRoutingModule,
@@ -26,6 +32,9 @@ import { ClienteGeneralService } from './cliente-general.service';
     HttpClientModule
   ],
   exports: [CoreComponent],
-  providers: [ClienteGeneralService]
+  providers: [ClienteGeneralService],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class CoreModule { }
