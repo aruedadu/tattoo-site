@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ClienteGeneralService } from 'src/app/core/cliente-general.service';
+import { SyncAsync } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-hacer-cotizacion',
@@ -10,11 +11,12 @@ import { ClienteGeneralService } from 'src/app/core/cliente-general.service';
 })
 export class HacerCotizacionComponent implements OnInit {
 
-  options = {format: 'DD/MM/YYYY HH:mm', buttons: {showClear: false}};
+  options: any = {format: 'DD/MM/YYYY HH:mm', buttons: {showClear: false}};
   date = null;
 
   public mostrarAgendas = false;
   public mostrarArtistasDisponibles = false;
+  public mensajeError;
 
   cotizacionForm: FormGroup;
   cotizacion: any[];
@@ -28,13 +30,19 @@ export class HacerCotizacionComponent implements OnInit {
   ngOnInit() {
     const test = moment.defaultFormatUtc;
     console.log(test);
-    this.date = moment(new Date(), 'YYYY/MM/DD HH:mm').minutes(0).seconds(0).milliseconds(0).utc(true);
+    const fechaActual = moment(new Date(), 'YYYY/MM/DD HH:mm').minutes(0).seconds(0).milliseconds(0).utc(true);
+    this.date = fechaActual;
+    this.options.minDate = fechaActual;
   }
 
-  obtenerValor(form) {
+  obtenerValor(form: { value: any; }) {
     this.cliente.postAny('/cotizacion/generar', form.value).subscribe(
       (data: any[]) => {
         this.cotizacion = data;
+      },
+      (error) => {
+        this.mensajeError = (error.error.message || error.message || 'Error interno de servidor');
+        console.log(error.error.message || error.error || 'Error interno de servidor');
       }
     );
     this.mostrarAgendas = true;
@@ -49,12 +57,17 @@ export class HacerCotizacionComponent implements OnInit {
   }
 
   consultarArtistasDisponibles(form) {
+    this.mensajeError = undefined;
     this.cliente.postAny('/artistas/consultar-artistas-disponibles', form.value).subscribe(
       (data: any[]) => {
         this.artistas = data;
+        this.mostrarArtistasDisponibles = true;
       },
+      (error) => {
+        this.mensajeError = (error.error.message || error.message || 'Error interno de servidor');
+        console.log(error.error.message || error.error || 'Error interno de servidor');
+      }
     );
-    this.mostrarArtistasDisponibles = true;
   }
 
   agendarCita(form) {
@@ -63,6 +76,10 @@ export class HacerCotizacionComponent implements OnInit {
       (data: any[]) => {
         this.artistas = data;
       },
+      (error) => {
+        this.mensajeError = (error.error.message || error.message || 'Error interno de servidor');
+        console.log(error.error.message || error.error || 'Error interno de servidor');
+      }
     );
     this.limpiar();
   }
