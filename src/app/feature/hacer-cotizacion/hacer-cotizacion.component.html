@@ -6,11 +6,10 @@
     <strong>Error! </strong>{{mensajeError}}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
   </div>
-  <div class="alert alert-primary alert-dismissible fade show" *ngIf="exito">
-    <strong>Primary!</strong> This is a simple primary alert box.
+  <div class="alert alert-primary alert-dismissible fade show" *ngIf="mensajeExito">
+    <strong>Éxito!</strong> {{mensajeExito}}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
   </div>
-  <h3>{{mensajeError}}</h3>
   <div class="row">
     <div class="col-sm-6">
         <div class="form-group">
@@ -63,7 +62,7 @@
       </div>
     <div class="col-sm-1">
       <div class="form-input">
-        <button class="btn btn-primary" (click)="limpiar()">Limpiar</button>
+        <button class="btn btn-primary" (click)="limpiar(true)">Limpiar</button>
       </div>
     </div>
   </div>

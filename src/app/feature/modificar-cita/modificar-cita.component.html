@@ -1,3 +1,29 @@
-<p>
-  modificar-cita works!
-</p>
+<form #citasForm="ngForm">
+  <h1>
+    Consultar y cancelar citas
+  </h1>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="cedulaCliente"><span class="hidden">Cédula Cliente</span></label>
+      <input name="cedulaCliente" id="cedulaCliente" type="text" placeholder="Cedula Cliente" ngModel required class="form-control">
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="consultarCitas(citasForm)">Consultar citas</button>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check" *ngFor="let el of elements">
+      <label for="element_{{el.id}}">
+        <input id="element_{{el.id}}" [value]='el.id' type="radio" name="enums" [(ngModel)]="radioSelected">
+        Fecha cita: {{el.startDate}} - Artista: {{el.tattooArtist.artistFullName}}
+      </label>
+    </div>
+  </div>
+  <div class="col-sm-3" *ngIf="elements">
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="cancelarCita()">Cancelar Cita</button>
+      </div>
+    </div>
+</form>

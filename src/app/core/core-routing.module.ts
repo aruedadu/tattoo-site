@@ -2,8 +2,8 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CoreComponent } from './core.component';
-import { AgendarCitaComponent } from '../feature/agendar-cita/agendar-cita.component';
 import { HacerCotizacionComponent } from '../feature/hacer-cotizacion/hacer-cotizacion.component';
+import { ModificarCitaComponent } from '../feature/modificar-cita/modificar-cita.component';
 const coreRoutes: Routes = [
     {
         path: '',
@@ -14,12 +14,12 @@ const coreRoutes: Routes = [
               component: DashboardComponent
             },
             {
-              path: 'agendar-cita',
-              component: AgendarCitaComponent
+              path: 'asignar-cita',
+              component: HacerCotizacionComponent
             },
             {
-              path: 'hacer-cotizacion',
-              component: HacerCotizacionComponent
+              path: 'operaciones-cita',
+              component: ModificarCitaComponent
             }
         ]
     }

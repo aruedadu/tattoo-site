@@ -1,7 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HacerCotizacionComponent } from './hacer-cotizacion/hacer-cotizacion.component';
-import { AgendarCitaComponent } from './agendar-cita/agendar-cita.component';
 import { ModificarCitaComponent } from './modificar-cita/modificar-cita.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgTempusdominusBootstrapModule } from 'src/tempus/ng-tempusdominus-bootstrap.module';
@@ -9,7 +8,6 @@ import { NgTempusdominusBootstrapModule } from 'src/tempus/ng-tempusdominus-boot
 @NgModule({
   declarations: [
     HacerCotizacionComponent,
-    AgendarCitaComponent,
     ModificarCitaComponent
   ],
   imports: [
