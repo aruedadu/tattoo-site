@@ -9,8 +9,11 @@ import { ClienteGeneralService } from 'src/app/core/cliente-general.service';
 })
 export class ModificarCitaComponent implements OnInit {
 
-  elements;
+  elements: any;
   citasForm: FormGroup;
+  public mensajeError: string;
+  public mensajeExito: string;
+  public mensajeAlerta: string;
 
   public radioSelected: any;
 
@@ -18,36 +21,54 @@ export class ModificarCitaComponent implements OnInit {
     private cliente: ClienteGeneralService
   ) {
     this.citasForm = new FormGroup({});
+    this.elements = [];
   }
 
   ngOnInit() {
   }
 
+  reiniciarMensajes() {
+    this.mensajeAlerta = undefined;
+    this.mensajeError = undefined;
+    this.mensajeExito = undefined;
+  }
+
   consultarCitas(form: { value: any; }) {
-    console.log(JSON.stringify(form.value));
+    this.reiniciarMensajes();
     this.cliente.postAny('/appointment/consultar-todas-citas', form.value).subscribe(
       (data: any[]) => {
-        console.log(JSON.stringify(data));
         this.elements = data['citas'];
+        if (data['citas'].length === 0) {
+          this.mensajeAlerta = 'Usted no posee ninguna cita agendada.';
+        }
       },
       (error) => {
-        console.log(error.error.message || error.error || 'Error interno de servidor');
+        this.mensajeError = (error.error.message || error.message || 'Error interno de servidor');
+        console.log(error || 'Error interno de servidor');
       }
     );
   }
 
   cancelarCita() {
-    console.log(this.radioSelected);
+    this.reiniciarMensajes();
+
     this.cliente.postAny('/appointment/cancelar-cita', {
       id: +this.radioSelected
     }).subscribe(
       (data: any[]) => {
-        //TODO: PONER MENSAJE DE EXITO Y RECARGAR LA LISTA :D
+        this.mensajeExito = 'Su cita se ha cancelado de manera exitosa';
+        this.removerCita(+this.radioSelected);
       },
       (error) => {
+        this.mensajeError = (error.error.message || error.message || 'Error interno de servidor');
         console.log(error.error.message || error.error || 'Error interno de servidor');
       }
     );
+  }
+
+  removerCita(index: number) {
+    const removeIndex = this.elements.map( (item: { id: any; }) =>  item.id ).indexOf(index);
+    this.elements.splice(removeIndex, 1);
   }
 
 }

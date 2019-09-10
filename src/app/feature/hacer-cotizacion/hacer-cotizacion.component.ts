@@ -31,7 +31,7 @@ export class HacerCotizacionComponent implements OnInit {
     const test = moment.defaultFormatUtc;
     console.log(test);
     const fechaActual = moment(new Date(), 'YYYY/MM/DD HH:mm').minutes(0).seconds(0).milliseconds(0).utc(true);
-    this.date = fechaActual;
+    //this.date = fechaActual;
     this.options.minDate = fechaActual;
   }
 
@@ -54,7 +54,7 @@ export class HacerCotizacionComponent implements OnInit {
     this.cotizacionForm.reset();
     this.mostrarAgendas = false;
     this.mostrarArtistasDisponibles = false;
-    this.date = moment(new Date(), 'YYYY/MM/DD HH:mm').minutes(0).seconds(0).milliseconds(0).utc(true);
+    //this.date = moment(new Date(), 'YYYY/MM/DD HH:mm').minutes(0).seconds(0).milliseconds(0).utc(true);
     this.cotizacion = [];
     if (limpiarExito) {
       this.mensajeExito = undefined;

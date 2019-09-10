@@ -2,6 +2,18 @@
   <h1>
     Consultar y cancelar citas
   </h1>
+  <div class="alert alert-danger alert-dismissible fade show" *ngIf="mensajeError" id="mensaje-error">
+    <strong>Error! </strong>{{mensajeError}}
+    <button type="button" class="close" data-dismiss="alert">x</button>
+  </div>
+  <div class="alert alert-primary alert-dismissible fade show" *ngIf="mensajeExito" id="mensaje-exito">
+    <strong>Éxito!</strong> {{mensajeExito}}
+    <button type="button" class="close" data-dismiss="alert">x</button>
+  </div>
+  <div class="alert alert-warning alert-dismissible fade show" *ngIf="mensajeAlerta" id="mensaje-alerta">
+    <strong>Alerta! </strong>{{mensajeAlerta}}
+    <button type="button" class="close" data-dismiss="alert">x</button>
+  </div>
   <div class="col-sm-6">
     <div class="form-group">
       <label for="cedulaCliente"><span class="hidden">Cédula Cliente</span></label>
@@ -10,7 +22,7 @@
   </div>
   <div class="col-sm-3">
     <div class="form-group">
-      <button class="btn btn-primary" (click)="consultarCitas(citasForm)">Consultar citas</button>
+      <button class="btn btn-primary" (click)="consultarCitas(citasForm)" id="consultar-citas-btn">Consultar citas</button>
     </div>
   </div>
   <div class="form-group">
@@ -21,9 +33,9 @@
       </label>
     </div>
   </div>
-  <div class="col-sm-3" *ngIf="elements">
+  <div class="col-sm-3" *ngIf="elements.length > 0">
       <div class="form-group">
-        <button class="btn btn-primary" (click)="cancelarCita()">Cancelar Cita</button>
+        <button class="btn btn-primary" (click)="cancelarCita()" id="cancelar-cita-btn">Cancelar Cita</button>
       </div>
     </div>
 </form>
